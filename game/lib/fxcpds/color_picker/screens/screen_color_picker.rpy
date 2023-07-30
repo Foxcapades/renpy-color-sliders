@@ -21,6 +21,7 @@ screen color_picker():
                     elif _color_picker_tab == "RGB":
                         use _color_picker_rgb_body(rgb_picker)
 
+
 screen _color_picker_tab_bar(tabs):
     hbox:
         style "_color_picker_tab_bar"
@@ -39,7 +40,6 @@ screen _color_picker_tab_bar(tabs):
                         style "_color_picker_tab_text_deselected"
 
                 action SetVariable("_color_picker_tab", val)
-
 
 
 screen _color_picker_hsl_body(bg_picker):
@@ -132,6 +132,7 @@ screen _color_picker_rgb_body(bg_picker):
                         changed bg_picker.set_blue
 
         use _color_picker_footer(h_value, bg_picker)
+
 
 screen _color_picker_footer(h_value, bg_picker):
     hbox:

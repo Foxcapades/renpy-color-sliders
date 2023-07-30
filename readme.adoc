@@ -29,6 +29,14 @@ the colors of the background, dialogue text, or character names.
 +
 image::.assets/example.png[]
 
+== Customization
+
+You may be looking at this thing and thinking "wow, that's kinda ugly," which is
+probably true.  I don't have an eye for design, and I don't pretend to, but
+luckily the link:game/lib/fxcpds/color_picker/screens/screen_color_picker.rpy[color picker screen]
+and link:game/lib/fxcpds/color_picker/screens/styles.rpy[its styles] are pretty
+simple and easily hackable.
+
 == License
 
 This source code and project are released under the MIT license, which to
