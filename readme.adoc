@@ -1,5 +1,7 @@
 = Ren'Py Color Sliders
 
+link:https://foxcapades.itch.io/renpy-color-sliders[On Itch.IO]
+
 Allow players to choose colors via RGB/HSL color sliders!
 
 image::.assets/rotate.gif[]
