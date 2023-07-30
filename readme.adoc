@@ -4,7 +4,8 @@ Allow players to choose colors via RGB/HSL color sliders!
 
 image::.assets/rotate.gif[]
 
-Includes a screen named `"color_picker"`.
+Includes a screen named `"color_picker"` which when closed, returns the users
+selected color as a hex string.
 
 == Usage
 
