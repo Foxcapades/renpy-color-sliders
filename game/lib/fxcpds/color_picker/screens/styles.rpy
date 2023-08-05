@@ -60,6 +60,16 @@ style _color_picker_tab_selected:
     is _color_picker_tab
     background "#2e2c2c"
 
+style _color_picker_tab_top_deselected:
+    background gui.muted_color
+    ysize 5
+    padding (25, 0)
+
+style _color_picker_tab_top_selected:
+    background gui.accent_color
+    ysize 5
+    padding (25, 0)
+
 style _color_picker_tab_text_deselected:
     color "#bbbbbb"
 

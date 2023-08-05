@@ -8,9 +8,9 @@ init python:
 """
 
 
-class HSLPicker:
+class HSVPicker:
     def __init__(self, original: str):
-        self._hsl = hex_to_fox_rgb(original).to_hsl()
+        self._hsv = hex_to_fox_rgb(original).to_hsv()
         self._last = original
 
     ############################################################################
@@ -22,22 +22,22 @@ class HSLPicker:
     @property
     def hue(self) -> int:
         self._course_correction()
-        return self._hsl.hue
+        return self._hsv.hue
 
     @property
     def saturation(self) -> int:
         self._course_correction()
-        return int(self._hsl.saturation * 100)
+        return int(self._hsv.saturation * 100)
 
     @property
-    def lightness(self) -> int:
+    def value(self) -> int:
         self._course_correction()
-        return int(self._hsl.lightness * 100)
+        return int(self._hsv.value * 100)
 
     @property
     def hex_string(self) -> str:
         self._course_correction()
-        return self._hsl.hex
+        return self._hsv.hex
 
     ############################################################################
     #
@@ -48,7 +48,7 @@ class HSLPicker:
     def _course_correction(self):
         global _color_picker_color
         if _color_picker_color != self._last:
-            self._hsl = hex_to_fox_rgb(_color_picker_color).to_hsl()
+            self._hsv = hex_to_fox_rgb(_color_picker_color).to_hsv()
             self._last = _color_picker_color
 
     def _update_color(self):
@@ -64,27 +64,27 @@ class HSLPicker:
     def set_hue(self, hue: int):
         if not (0 <= hue < 360):
             raise Exception("invalid hue value")
-        self._hsl.set_hue(hue)
+        self._hsv.set_hue(hue)
         self._update_color()
         renpy.restart_interaction()
 
     def set_saturation(self, saturation: int):
         if not (0 <= saturation <= 100):
             raise Exception("invalid saturation value")
-        self._hsl.set_saturation(saturation / 100)
+        self._hsv.set_saturation(saturation / 100)
         self._update_color()
         renpy.restart_interaction()
 
-    def set_lightness(self, lightness: int):
-        if not (0 <= lightness <= 100):
-            raise Exception("invalid lightness value")
-        self._hsl.set_lightness(lightness / 100)
+    def set_value(self, value: int):
+        if not (0 <= value <= 100):
+            raise Exception("invalid value value")
+        self._hsv.set_value(value / 100)
         self._update_color()
         renpy.restart_interaction()
 
 
-class HSLPickerInputValue(InputValue):
-    def __init__(self, picker: HSLPicker, value: str, setter: function):
+class HSVPickerInputValue(InputValue):
+    def __init__(self, picker: HSVPicker, value: str, setter: function):
         self.default = False
 
         self._value = value

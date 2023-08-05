@@ -1,7 +1,7 @@
 from renpy.store import InputValue # type: ignore
 import renpy # type: ignore
 
-from ...utils.hex_color_ren import _validate_hex
+from ....color_utils.fox_hex_utils_ren import fox_hex_is_valid, __is_hex_digit
 
 
 """renpy
@@ -26,16 +26,11 @@ class HexInputValue(InputValue):
             return attr
 
     def set_text(self, text: str):
-        l = len(text)
+        if fox_hex_is_valid(text):
+            self._value = text
 
-        print(text)
+            l = len(text)
+            if l == 3 or l == 6:
+                setattr(renpy.store, self._var_name, '#' + text)
 
-        if l == 3 or l == 6:
-            tmp = '#' + text
-            try:
-                _validate_hex(tmp)
-                setattr(renpy.store, self._var_name, tmp)
-            except:
-                pass
-        self._value = text
         renpy.restart_interaction()

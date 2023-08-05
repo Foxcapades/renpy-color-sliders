@@ -1,9 +1,7 @@
 import renpy # type: ignore
 from renpy.store import InputValue # type: ignore
 
-from ...colors.csrgb_ren import CSRGB
-from ...utils.hex_color_ren import _parse_hex
-
+from ....color_utils.fox_color_ren import hex_to_fox_rgb
 
 """renpy
 init python:
@@ -13,7 +11,7 @@ init python:
 class RGBPicker:
 
     def __init__(self, original: str):
-        self._rgb = _parse_hex(original)
+        self._rgb = hex_to_fox_rgb(original)
         self._last = original
 
     @property
@@ -34,12 +32,12 @@ class RGBPicker:
     @property
     def hex_string(self):
         self._course_correction()
-        return self._rgb.hex_string
+        return self._rgb.hex
 
     def _course_correction(self):
         global _color_picker_color
         if _color_picker_color != self._last:
-            self._rgb = _parse_hex(_color_picker_color)
+            self._rgb = hex_to_fox_rgb(_color_picker_color)
             self._last = _color_picker_color
 
     def _update_color(self):

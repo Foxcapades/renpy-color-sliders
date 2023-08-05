@@ -40,7 +40,7 @@ build-slim-zip: clean
 	@mkdir -p $(BUILD_DIR)
 	@rm -f "$(SLIM_ZIP_NAME)"
 	@cp license color-picker-license
-	@zip -r "$(SLIM_ZIP_NAME)" game/lib/fxcpds/color_picker color-picker-license
+	@zip -r "$(SLIM_ZIP_NAME)" game/lib/fxcpds color-picker-license
 	@rm color-picker-license
 
 

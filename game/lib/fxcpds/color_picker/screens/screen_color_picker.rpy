@@ -1,7 +1,8 @@
 screen color_picker():
     default hsl_picker = HSLPicker(_color_picker_color)
+    default hsv_picker = HSVPicker(_color_picker_color)
     default rgb_picker = RGBPicker(_color_picker_color)
-    default tabs = [ "RGB", "HSL" ]
+    default tabs = [ "RGB", "HSL", "HSV" ]
 
     frame:
         modal True
@@ -18,6 +19,8 @@ screen color_picker():
 
                     if _color_picker_tab == "HSL":
                         use _color_picker_hsl_body(hsl_picker)
+                    elif _color_picker_tab == "HSV":
+                        use _color_picker_hsv_body(hsv_picker)
                     elif _color_picker_tab == "RGB":
                         use _color_picker_rgb_body(rgb_picker)
 
@@ -27,19 +30,28 @@ screen _color_picker_tab_bar(tabs):
         style "_color_picker_tab_bar"
 
         for val in tabs:
-            button:
-                if _color_picker_tab == val:
-                    style "_color_picker_tab_selected"
-                else:
-                    style "_color_picker_tab_deselected"
-
-                text val:
+            vbox:
+                button:
                     if _color_picker_tab == val:
-                        style "_color_picker_tab_text_selected"
+                        style "_color_picker_tab_top_selected"
                     else:
-                        style "_color_picker_tab_text_deselected"
+                        style "_color_picker_tab_top_deselected"
 
-                action SetVariable("_color_picker_tab", val)
+                    text val
+
+                button:
+                    if _color_picker_tab == val:
+                        style "_color_picker_tab_selected"
+                    else:
+                        style "_color_picker_tab_deselected"
+
+                    text val:
+                        if _color_picker_tab == val:
+                            style "_color_picker_tab_text_selected"
+                        else:
+                            style "_color_picker_tab_text_deselected"
+
+                    action SetVariable("_color_picker_tab", val)
 
 
 screen _color_picker_hsl_body(bg_picker):
@@ -84,6 +96,52 @@ screen _color_picker_hsl_body(bg_picker):
                         value bg_picker.lightness
                         range 100
                         changed bg_picker.set_lightness
+
+        use _color_picker_footer(hex_value, bg_picker)
+
+
+screen _color_picker_hsv_body(bg_picker):
+    default hue_value = HSVPickerInputValue(bg_picker, "hue_str", bg_picker.set_hue)
+    default sat_value = HSVPickerInputValue(bg_picker, "saturation_str", bg_picker.set_saturation)
+    default lig_value = HSVPickerInputValue(bg_picker, "va;ie_str", bg_picker.set_value)
+    default hex_value = HexInputValue('_color_picker_color')
+
+    vbox:
+        spacing 20
+
+        hbox:
+            spacing 20
+
+            frame:
+                style "_color_picker_preview"
+
+            vbox:
+                spacing 20
+
+                vbox:
+                    text "Hue":
+                        style "_color_picker_bar_text"
+                    bar:
+                        style "_color_picker_bar"
+                        value bg_picker.hue
+                        range 359
+                        changed bg_picker.set_hue
+                vbox:
+                    text "Saturation":
+                        style "_color_picker_bar_text"
+                    bar:
+                        style "_color_picker_bar"
+                        value bg_picker.saturation
+                        range 100
+                        changed bg_picker.set_saturation
+                vbox:
+                    text "Value":
+                        style "_color_picker_bar_text"
+                    bar:
+                        style "_color_picker_bar"
+                        value bg_picker.value
+                        range 100
+                        changed bg_picker.set_value
 
         use _color_picker_footer(hex_value, bg_picker)
 
