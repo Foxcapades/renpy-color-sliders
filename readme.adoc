@@ -29,7 +29,7 @@ label start:
 . Use the returned hex code string for whatever you like, for example changing
 the colors of the background, dialogue text, or character names.
 +
-image::.assets/example.png[]
+image::.assets/example.gif[]
 
 == Customization
 
