@@ -4,7 +4,7 @@ link:https://foxcapades.itch.io/renpy-color-sliders[On Itch.IO]
 
 Allow players to choose colors via RGB/HSL color sliders!
 
-image::.assets/rotate.gif[]
+image::.assets/preview.gif[]
 
 Includes a screen named `"color_picker"` which when closed, returns the users
 selected color as a hex string.
